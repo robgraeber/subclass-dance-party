@@ -5,6 +5,7 @@ var ObamaDancer = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
   this.$node.append('<img src="resources/dancing_obama.gif" />');
   var oldStep = this.step;
+
   this.lineUp = function(){
      this.$node.finish();
      var styleSettings = {
@@ -12,19 +13,22 @@ var ObamaDancer = function(top, left, timeBetweenSteps){
     };
     this.$node.css(styleSettings);
   };
+
   this.moveLeft = function(){
     this.$node.animate({
       left: "-=50"
     }, 500);
   };
+
   this.moveRight = function(){
     this.$node.animate({
       left: "+=50"
     }, 500);
   };
+
   this.step = function(){
     // call the old version of step at the beginning of any call to this new version of step
-    oldStep();
+    oldStep.call(this);
     this.moveLeft();
     this.moveRight();
   };
