@@ -5,20 +5,34 @@ var ObamaDancer = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
   this.$node.append('<img src="resources/dancing_obama.gif" />');
   var oldStep = this.step;
-
+  this.lineUp = function(){
+     this.$node.finish();
+     var styleSettings = {
+      left: 40
+    };
+    this.$node.css(styleSettings);
+  };
+  this.moveLeft = function(){
+    this.$node.animate({
+      left: "-=50"
+    }, 500);
+  };
+  this.moveRight = function(){
+    this.$node.animate({
+      left: "+=50"
+    }, 500);
+  };
   this.step = function(){
     // call the old version of step at the beginning of any call to this new version of step
     oldStep();
-    obamaMoves();
+    this.moveLeft();
+    this.moveRight();
   };
-  var spanStyleSettings = {
-    border: "none"
-  };
+
   var imgStyleSettings = {
     width: "25%",
     height: "25%"
   };
-  this.$node.css(spanStyleSettings);
   this.$node.find("img").css(imgStyleSettings);
 };
 

@@ -5,19 +5,45 @@ var HamsterDancer = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
   this.$node.append('<img src="resources/hamster.gif" />');
   var oldStep = this.step;
+  this.lineUp = function(){
+    this.$node.finish();
+    this.step = function(){};
+     var styleSettings = {
+      left: 40
+    };
+    this.$node.css(styleSettings);
+  };
+  this.bounce = function(){
+    var bounce = 50;
+    var y;
+    for(var x = 0; x < bounce; x++){
+      if(x < bounce/2-x){
+        //rising
+        y = x/2;
+        this.$node.animate({
+          left: x + left,
+          top: y + top
+        }, 30);
+      }else if(x >= bounce/2-x){
+        //falling
+        y = bounce/2-x;
+        this.$node.animate({
+          left: x + left,
+          top: y + top
+        }, 30);
+      }
+    }
+  };
 
   this.step = function(){
     // call the old version of step at the beginning of any call to this new version of step
     oldStep();
-  };
-  var spanStyleSettings = {
-    border: "none"
+    this.bounce();
   };
   var imgStyleSettings = {
     width: "25%",
     height: "25%"
   };
-  this.$node.css(spanStyleSettings);
   this.$node.find("img").css(imgStyleSettings);
 };
 

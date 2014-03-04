@@ -27,8 +27,17 @@ $(document).ready(function(){
       $("body").width() * Math.random(),
       Math.random() * 1000
     );
+    window.dancers.push(dancer);
     $('body').append(dancer.$node);
   });
+});
+$(".lineUpButton").on("click", function(event){
+  console.log("LINE UP!!");
+  //magic happens here
+  for(var i = 0; i < window.dancers.length; i++){
+    var dancer = window.dancers[i];
+    dancer.lineUp();
+  }
 });
 
 // var makeBlinkyDancer = function(top, left, timeBetweenSteps){
@@ -47,7 +56,6 @@ $(document).ready(function(){
 // };
 
 var makeObamaDancer = function(top, left, timeBetweenSteps){
-  console.log(arguments);
   return new ObamaDancer(top, left, timeBetweenSteps);
 };
 
