@@ -1,8 +1,9 @@
-var BlinkyDancer = function(top, left, timeBetweenSteps){
+var BreakDancer = function(top, left, timeBetweenSteps){
 
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
   // so we must keep a copy of the old version of this function
   Dancer.call(this,top, left, timeBetweenSteps);
+  
   var oldStep = this.step;
 
   this.step = function(){
@@ -15,6 +16,6 @@ var BlinkyDancer = function(top, left, timeBetweenSteps){
   };
 };
 
-BlinkyDancer.prototype = new Dancer();
+BreakDancer.prototype = new Dancer();
 
-BlinkyDancer.prototype.constructor = BlinkyDancer;
+BreakDancer.prototype.constructor = BreakDancer;

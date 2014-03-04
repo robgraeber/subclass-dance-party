@@ -31,3 +31,32 @@ $(document).ready(function(){
   });
 });
 
+// var makeBlinkyDancer = function(top, left, timeBetweenSteps){
+
+//   return new BlinkyDancer(top, left, timeBetweenSteps);
+// };
+
+// var makeChameleonDancer = function(top, left, timeBetweenSteps){
+
+//   return new ChameleonDancer(top, left, timeBetweenSteps);
+// };
+
+// var makeBreakDancer = function(top, left, timeBetweenSteps){
+
+//   return new BreakDancer(top, left, timeBetweenSteps);
+// };
+
+var makeObamaDancer = function(top, left, timeBetweenSteps){
+  console.log(arguments);
+  return new ObamaDancer(top, left, timeBetweenSteps);
+};
+
+var makeStickDancer = function(top, left, timeBetweenSteps){
+
+  return new StickDancer(top, left, timeBetweenSteps);
+};
+
+var makeHamsterDancer = function(top, left, timeBetweenSteps){
+
+  return new HamsterDancer(top, left, timeBetweenSteps);
+};
