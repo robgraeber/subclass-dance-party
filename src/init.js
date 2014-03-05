@@ -19,36 +19,40 @@ $(document).ready(function(){
   opacityCheck();
   setInterval(opacityCheck,1000/60);
 
-
-  $(".addDancerButton").on("click", function(event){
-    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-    var dancerMakerFunction = window[dancerMakerFunctionName];
+  var setupDancer = function(Class){
     var floorMin = $(window).height() * 0;
     var floorMax = $(window).height() * 0.08;
-    var dancer = new dancerMakerFunction(numberBetween(floorMin,floorMax), numberBetween(0,$(window).width()), Math.random() * 1000);
+    var dancer = new Class(numberBetween(floorMin,floorMax), numberBetween(0,$(window).width()), Math.random() * 1000);
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
-
     if(dancer instanceof ObamaDancer){
       dancer.$node.on("mouseover",function(event){
         dancer.$node.stop();
-        dancer.$node.hide( "explode", {pieces: 9 }, 500 );
+        dancer.$node.hide( "explode", {pieces: 16 }, 500 );
       });
     }
     if(dancer instanceof StickDancer){
       dancer.$node.on("mouseover",function(event){
         dancer.removeTimer();
-        dancer.$node.hide( "explode", {pieces: 9 }, 500 );
+        dancer.$node.hide("scale", 
+          {percent: 25}, 500 );
       });
     }
-
     if(dancer instanceof HamsterDancer){
-      dancer.$node.on("click",function(event){
+      dancer.$node.on("mouseover",function(event){
         dancer.$node.stop();
         dancer.$node.hide("scale", 
           {percent: 25}, 500 );
       });
     }
+  };
+  setupDancer(HamsterDancer);
+  setInterval(function(){setupDancer(HamsterDancer);},1500);
+
+  $(".addDancerButton").on("click", function(event){
+    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
+    var dancerMakerFunction = window[dancerMakerFunctionName];
+    setupDancer(dancerMakerFunction);
   });
 
   $(".lineUpButton").on("click", function(event){
