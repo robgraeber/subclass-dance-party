@@ -25,8 +25,11 @@ var StickDancer = function(bottom, left, timeBetweenSteps){
   };
   var timer = setInterval (handleEnterFrame, 1000/30);
 
-  this.lineUp = function(){
+  this.removeTimer = function(){
     clearInterval(timer);
+  };
+  this.lineUp = function(){
+    this.removeTimer();
     var styleSettings = {
       left: 50
     };
@@ -34,12 +37,10 @@ var StickDancer = function(bottom, left, timeBetweenSteps){
   };
 
   this.step = function(){
-    // call the old version of step at the beginning of any call to this new version of step
     oldStep.call(this);
     if(!isJumping){
       dy = 15;
       isJumping = true;
-      console.log(dy);
     }
   };
 };

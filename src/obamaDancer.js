@@ -3,32 +3,29 @@ var ObamaDancer = function(bottom, left, timeBetweenSteps){
   Dancer.call(this, bottom, left, timeBetweenSteps);
   this.$node.append('<img src="resources/dancing_obama.gif" class="obama"/>');
   var oldStep = this.step;
-
+  var that = this;
   this.lineUp = function(){
-     this.$node.finish();
+     this.$node.stop();
      var styleSettings = {
       left: 40
     };
     this.$node.css(styleSettings);
   };
 
-  this.moveLeft = function(){
-    this.$node.animate({
-      left: "-=50"
-    }, 500);
-  };
-
   this.moveRight = function(){
-    this.$node.animate({
+    that.$node.animate({
       left: "+=50"
-    }, 500);
+    }, 500,
+  function(){
+    that.$node.animate({
+      left: "-=50"
+    }, 500,
+  function(){
+    that.moveRight();
+  });
+  });
   };
-
-  this.step = function(){
-    oldStep.call(this);
-    this.moveLeft();
-    this.moveRight();
-  };
+  this.moveRight();
 };
 
 ObamaDancer.prototype = new Dancer();
