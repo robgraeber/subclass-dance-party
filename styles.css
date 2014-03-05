@@ -13,6 +13,11 @@ body{
 body, a:link, a:visited, a:active{
   color: lightblue;
 }
+.counter{
+  float: left;
+  background-color: #777;
+  padding:5px 22px 5px 12px;
+}
 .title, .addDancerButton, .lineUpButton{
   padding:5px 12px;
   float:right;

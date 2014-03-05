@@ -1,5 +1,6 @@
 $(document).ready(function(){
   window.dancers = [];
+  var deadHamsters = 0;
   var numberBetween = function (min, max) {
     return Math.random() * (max - min) + min;
   };
@@ -39,6 +40,8 @@ $(document).ready(function(){
       });
     }
     if(dancer instanceof HamsterDancer){
+      deadHamsters++;
+      $(".counter").text("Hamsters in heaven: "+ deadHamsters);
       dancer.$node.on("mouseover",function(event){
         dancer.$node.stop();
         dancer.$node.hide("scale", 
@@ -47,7 +50,7 @@ $(document).ready(function(){
     }
   };
   setupDancer(HamsterDancer);
-  setInterval(function(){setupDancer(HamsterDancer);},1500);
+  setInterval(function(){setupDancer(HamsterDancer);},1250);
 
   $(".addDancerButton").on("click", function(event){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
