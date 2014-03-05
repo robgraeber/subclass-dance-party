@@ -21,8 +21,8 @@ $(document).ready(function(){
   setInterval(opacityCheck,1000/60);
 
   var setupDancer = function(Class){
-    var floorMin = $(window).height() * 0;
-    var floorMax = $(window).height() * 0.08;
+    var floorMin = $(window).height() * 0.02;
+    var floorMax = $(window).height() * 0.06;
     var dancer = new Class(numberBetween(floorMin,floorMax), numberBetween(0,$(window).width()), Math.random() * 1000);
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
@@ -50,7 +50,7 @@ $(document).ready(function(){
     }
   };
   setupDancer(HamsterDancer);
-  setInterval(function(){setupDancer(HamsterDancer);},1250);
+  setInterval(function(){setupDancer(HamsterDancer);},1500);
 
   $(".addDancerButton").on("click", function(event){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
