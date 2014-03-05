@@ -1,23 +1,21 @@
-var StickDancer = function(top, left, timeBetweenSteps){
+var StickDancer = function(bottom, left, timeBetweenSteps){
 
-  // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
-  // so we must keep a copy of the old version of this function
-  Dancer.call(this, top, left, timeBetweenSteps);
+  Dancer.call(this, bottom, left, timeBetweenSteps);
   this.$node.append('<img src="resources/stick.gif" />');
   var sprite = this.$node;
   var x = left;
-  var y = top;
+  var y = bottom;
   var dx = 0;
   var dy = 0;
-  var groundLevel = top;
+  var groundLevel = bottom;
   var isJumping = false;
   var oldStep = this.step;
 
   var handleEnterFrame = function(){
-    sprite.css({left: x, top: y});
+    sprite.css({left: x, bottom: y});
     x += dx;
-    y -= dy;
-    if(y > groundLevel && isJumping){
+    y += dy;
+    if(y < groundLevel && isJumping){
       isJumping = false;
       dy = 0;
       y = groundLevel;
@@ -37,17 +35,13 @@ var StickDancer = function(top, left, timeBetweenSteps){
 
   this.step = function(){
     // call the old version of step at the beginning of any call to this new version of step
-    oldStep();
+    oldStep.call(this);
     if(!isJumping){
-      dy = 25;
+      dy = 15;
       isJumping = true;
+      console.log(dy);
     }
   };
-  var imgStyleSettings = {
-    width: "25%",
-    height: "25%"
-  };
-  this.$node.find("img").css(imgStyleSettings);
 };
 
 StickDancer.prototype = new Dancer();

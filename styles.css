@@ -2,9 +2,9 @@ body, html{
   height:100%;
 }
 body{
-  margin: 0px;
-  background: url(resources/bg.gif) no-repeat;
-  background-size: 100%;
+  margin: 0;
+  background: url(resources/bg.gif) no-repeat fixed bottom;
+  background-size: cover;
   width: 100%;
   height: 100%;
   background-color:#444;
@@ -25,7 +25,10 @@ body, a:link, a:visited, a:active{
   background-color: #777;
 }
 .dancer{
-  /*border:10px solid red;
-  border-radius:10px;*/
+  width:70px;
   position:absolute;
+}
+.dancer img{
+  width:100%;
+  height:100%;
 }
